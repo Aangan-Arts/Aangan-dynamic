@@ -1,0 +1,25 @@
+# AANGAN — every search engine and AI assistant is welcome to read this site.
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Allow: /
+
+# AI assistants and answer engines (allowed explicitly)
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://aangan.co.in/sitemap.xml

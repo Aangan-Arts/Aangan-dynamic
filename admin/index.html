@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#622B30">
+<title>AANGAN Admin</title>
+<link rel="icon" type="image/png" href="../images/brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--burg:#622B30;--burg2:#4A1F23;--gold:#AF8D56;--ivory:#FFFDF9;--paper:#FBF4EA;--line:#E7D9C4;--ink:#2E211C;--muted:#6E5D53;--ok:#2F6B3A;--warn:#9A5B10;--bad:#A23B3B;
+  --sans:'DM Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--serif:'Cormorant Garamond',Georgia,serif;box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 var(--sans);-webkit-text-size-adjust:100%}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--burg)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--burg);color:var(--ivory)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--burg)}
+.bar{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem}
+.brand{font:600 1.45rem/1 var(--serif);letter-spacing:.14em}
+.brand small{font:500 .7rem var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.8;margin-left:.4rem}
+.bar .out{margin-left:auto;color:var(--ivory);opacity:.85;font-size:.85rem}
+.tabs{max-width:980px;margin:0 auto;display:flex;padding:0 .5rem}
+.tabs button{flex:1;background:none;border:0;border-bottom:3px solid transparent;color:var(--ivory);opacity:.75;padding:.65rem .5rem;font-weight:600;min-height:44px}
+.tabs button[aria-selected=true]{opacity:1;border-color:var(--gold)}
+main{max-width:980px;margin:0 auto;padding:1rem}
+.pub{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;background:#FFF6E3;border:1px solid #E9C98F;border-radius:12px;padding:.7rem .9rem;margin-bottom:1rem}
+.pub p{margin:0;flex:1;min-width:12rem}
+.pub.ok{background:#EEF6EF;border-color:#B9D6BE}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:44px;padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--burg);background:var(--burg);color:var(--ivory);font-weight:600;text-decoration:none;white-space:nowrap}
+.btn.line{background:var(--ivory);color:var(--burg)}
+.btn.ghost{background:none;border-color:transparent;color:var(--burg)}
+.btn.bad{background:var(--ivory);color:var(--bad);border-color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.chip:focus-visible,.row:focus-visible,.tabs button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tools{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:.8rem}
+.search{flex:1;min-width:12rem;border:1px solid var(--line);background:var(--ivory);border-radius:999px;padding:.6rem 1rem;min-height:44px}
+.chips{display:flex;gap:.45rem;overflow-x:auto;padding:.1rem 0 .7rem;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--ivory);border-radius:999px;padding:.45rem .85rem;min-height:40px;font-size:.88rem;color:var(--ink)}
+.chip b{font-weight:600;margin-left:.25rem;color:var(--muted)}
+.chip[aria-pressed=true]{background:var(--burg);border-color:var(--burg);color:var(--ivory)}
+.chip[aria-pressed=true] b{color:#F3DDB8}
+.list{display:grid;grid-template-columns:minmax(0,1fr);gap:.6rem}
+.row{min-width:0;display:flex;gap:.8rem;align-items:center;width:100%;text-align:left;background:var(--ivory);border:1px solid var(--line);border-radius:14px;padding:.75rem .85rem;min-height:64px}
+.row:hover{border-color:var(--gold)}
+.row .main{flex:1;min-width:0}
+.row .t{font-weight:600;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.row .s{color:var(--muted);font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .amt{font-weight:600;white-space:nowrap}
+.row img{width:52px;height:66px;object-fit:cover;border-radius:8px;background:var(--line);flex:none}
+.badge{display:inline-block;border-radius:999px;padding:.1rem .55rem;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border:1px solid}
+.st-new{color:#8A4B00;background:#FFF1D6;border-color:#EBC98A}
+.st-confirmed{color:#1F4E8C;background:#E7F0FB;border-color:#B4CCEB}
+.st-paid{color:#5B2C83;background:#F1E8FA;border-color:#D2BDE8}
+.st-shipped{color:#0F5E63;background:#E2F4F4;border-color:#A9D9DB}
+.st-delivered{color:var(--ok);background:#E8F3EA;border-color:#B5D6BB}
+.st-cancelled{color:#6B5F5A;background:#EFEBE8;border-color:#D5CCC6}
+.muted{color:var(--muted)}
+.small{font-size:.85rem}
+.empty{text-align:center;color:var(--muted);padding:2.5rem 1rem;background:var(--ivory);border:1px dashed var(--line);border-radius:14px}
+.toggle{position:relative;width:48px;height:28px;flex:none;border-radius:999px;border:0;background:#CDBFAE;padding:0}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .2s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.toggle[aria-checked=true]{background:var(--ok)}
+.toggle[aria-checked=true]::after{transform:translateX(20px)}
+/* sheet (order detail / product editor) */
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(46,33,28,.35);display:none}
+.sheet.open{display:block}
+.panel{position:absolute;inset:0 0 0 auto;width:min(620px,100%);background:var(--paper);overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 0px) 0 calc(env(safe-area-inset-bottom,0px) + 1.5rem)}
+.ph{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:.5rem;background:var(--paper);border-bottom:1px solid var(--line);padding:.6rem .8rem}
+.ph h2{margin:0;font:600 1.35rem/1.2 var(--serif);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pb{padding:1rem}
+.card{background:var(--ivory);border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem;margin-bottom:.8rem}
+.card h3{margin:0 0 .6rem;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem}
+.steps button{min-height:44px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:.86rem;font-weight:600}
+.steps button[aria-pressed=true]{background:var(--burg);border-color:var(--burg);color:var(--ivory)}
+.items{width:100%;border-collapse:collapse}
+.items td{padding:.35rem 0;border-bottom:1px solid var(--line);vertical-align:top}
+.items td:last-child{text-align:right;white-space:nowrap;padding-left:.75rem}
+.items tr:last-child td{border-bottom:0}
+.tot{display:flex;justify-content:space-between;font-weight:600;padding-top:.5rem}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:.3rem .9rem;margin:0}
+dl.kv dt{color:var(--muted);font-size:.85rem}
+dl.kv dd{margin:0;word-break:break-word}
+.acts{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}
+.hist{list-style:none;margin:0;padding:0;font-size:.86rem}
+.hist li{display:flex;justify-content:space-between;gap:1rem;padding:.25rem 0;border-bottom:1px dashed var(--line)}
+.hist li:last-child{border-bottom:0}
+label.f{display:block;font-weight:600;font-size:.88rem;margin:.9rem 0 .3rem}
+label.f:first-child{margin-top:0}
+.in,textarea.in{width:100%;border:1px solid var(--line);background:#fff;border-radius:10px;padding:.65rem .75rem;min-height:44px}
+textarea.in{min-height:96px;resize:vertical}
+.in:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+.hint{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.kvrow{display:grid;grid-template-columns:1fr 1.6fr auto;gap:.4rem;margin-bottom:.4rem}
+.x{min-width:44px;min-height:44px;border:1px solid var(--line);background:#fff;border-radius:10px}
+.photo{display:flex;gap:.9rem;align-items:center}
+.photo .pv{width:110px;height:140px;border-radius:12px;background:var(--line) center/cover no-repeat;border:1px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem;text-align:center;padding:.4rem}
+.photo input{position:absolute;width:1px;height:1px;opacity:0}
+.swrow{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.err{color:var(--bad);font-size:.85rem;margin-top:.5rem;min-height:1em}
+.save{position:sticky;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:.75rem 1rem calc(.75rem + env(safe-area-inset-bottom,0px));display:flex;gap:.5rem;justify-content:space-between;align-items:center}
+.toast{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(1rem);opacity:0;visibility:hidden;background:var(--ink);color:#fff;padding:.7rem 1.1rem;border-radius:999px;z-index:90;transition:transform .25s,opacity .25s,visibility .25s;max-width:calc(100% - 2rem);font-size:.9rem}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;visibility:visible}
+.gate{max-width:420px;margin:15vh auto;text-align:center;background:var(--ivory);border:1px solid var(--line);border-radius:16px;padding:2rem 1.5rem}
+@media (min-width:700px){.list.prod{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head>
+<body>
+<header class="top">
+  <div class="bar"><span class="brand">AANGAN<small>Admin</small></span><a class="out" href="/cdn-cgi/access/logout">Sign out</a></div>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-orders" aria-selected="true" aria-controls="view">Orders</button>
+    <button role="tab" id="tab-products" aria-selected="false" aria-controls="view">Products</button>
+  </nav>
+</header>
+<main id="view" role="tabpanel" aria-live="polite"><p class="muted">Loading…</p></main>
+<div class="sheet" id="sheet" aria-hidden="true"><section class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="sheet-title"></section></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+  /* ---------- helpers ---------- */
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const rupee = n => n == null ? '—' : '₹' + Number(n).toLocaleString('en-IN');
+  const when = iso => { if (!iso) return ''; const d = new Date(iso); return d.toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) };
+  const ago = iso => { const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 1 ? 'just now' : m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : `${Math.round(m / 1440)} d ago` };
+  const STATUS = [['new', 'New'], ['confirmed', 'Confirmed'], ['paid', 'Paid'], ['shipped', 'Shipped'], ['delivered', 'Delivered'], ['cancelled', 'Cancelled']];
+  const stLabel = s => (STATUS.find(x => x[0] == s) || [s, s])[1];
+  const badge = s => `<span class="badge st-${esc(s)}">${esc(stLabel(s))}</span>`;
+  const toastEl = $('#toast'); let tt;
+  const toast = m => { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove('show'), 2600) };
+  /* product photos: relative paths live at the site root */
+  const imgUrl = u => !u ? '' : /^(https?:|blob:|data:)/.test(u) ? u : '/' + u.replace(/^\//, '');
+
+  async function api(path, opts = {}) {
+    const r = await fetch('/api/admin/' + path, { credentials: 'same-origin', ...opts, headers: { ...(opts.body && !(opts.body instanceof Blob) ? { 'content-type': 'application/json' } : {}), ...(opts.headers || {}) } });
+    let data = {}; try { data = await r.json() } catch (_) { }
+    if (r.status === 401) { gate(); throw new Error('signed-out') }
+    if (!r.ok || data.ok === false) throw new Error(data.error || `Error ${r.status}`);
+    return data;
+  }
+  function gate() {
+    $('#view').innerHTML = `<div class="gate"><h2 style="font-family:var(--serif)">Please sign in</h2><p class="muted">Your admin session has ended.</p><a class="btn" href="/admin/">Sign in again</a></div>`;
+  }
+
+  /* ---------- tabs ---------- */
+  let tab = location.hash === '#products' ? 'products' : 'orders';
+  function setTab(t) {
+    tab = t; history.replaceState(null, '', t === 'products' ? '#products' : '#orders');
+    $('#tab-orders').setAttribute('aria-selected', t === 'orders'); $('#tab-products').setAttribute('aria-selected', t === 'products');
+    t === 'orders' ? loadOrders() : loadProducts();
+  }
+  $('#tab-orders').onclick = () => setTab('orders'); $('#tab-products').onclick = () => setTab('products');
+
+  /* ---------- sheet ---------- */
+  const sheet = $('#sheet'), panel = $('#panel'); let lastFocus = null;
+  function openSheet(html) {
+    lastFocus = document.activeElement; panel.innerHTML = html; sheet.classList.add('open'); sheet.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; panel.scrollTop = 0; const f = $('[data-close]', panel); if (f) f.focus();
+  }
+  function closeSheet() { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; panel.innerHTML = ''; if (lastFocus) lastFocus.focus() }
+  sheet.addEventListener('click', e => { if (e.target === sheet || e.target.closest('[data-close]')) closeSheet() });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && sheet.classList.contains('open')) closeSheet() });
+  const head = (title, extra = '') => `<div class="ph"><button class="btn ghost" data-close aria-label="Close">←</button><h2 id="sheet-title">${title}</h2>${extra}</div>`;
+
+  /* ================= ORDERS ================= */
+  const OS = { status: 'new', q: '' }; let qTimer;
+  async function loadOrders() {
+    const v = $('#view');
+    if (!$('#orders-ui', v)) v.innerHTML = `<div id="orders-ui"><div class="tools"><input class="search" id="oq" type="search" placeholder="Search name, phone, city or order ref" aria-label="Search orders" value="${esc(OS.q)}"></div>
+      <div class="chips" id="ochips" role="group" aria-label="Filter by status"></div><div class="list" id="olist"><p class="muted">Loading…</p></div></div>`;
+    $('#oq').oninput = e => { clearTimeout(qTimer); qTimer = setTimeout(() => { OS.q = e.target.value.trim(); loadOrders() }, 300) };
+    let d; try { d = await api(`orders?status=${encodeURIComponent(OS.status)}&q=${encodeURIComponent(OS.q)}`) } catch (e) { if (e.message !== 'signed-out') $('#olist').innerHTML = `<p class="err">${esc(e.message)}</p>`; return }
+    const all = Object.values(d.counts).reduce((a, b) => a + b, 0);
+    $('#ochips').innerHTML = [['', 'All', all], ...STATUS.map(([k, l]) => [k, l, d.counts[k] || 0])]
+      .map(([k, l, n]) => `<button class="chip" data-st="${k}" aria-pressed="${OS.status === k}">${l}<b>${n}</b></button>`).join('');
+    $$('#ochips .chip').forEach(b => b.onclick = () => { OS.status = b.dataset.st; loadOrders() });
+    $('#olist').innerHTML = d.orders.length ? d.orders.map(o => {
+      const n = o.items.reduce((a, i) => a + i.qty, 0);
+      const who = o.name ? esc(o.name) + (o.city ? ', ' + esc(o.city) : '') : '<i>Details coming on WhatsApp</i>';
+      return `<button class="row" data-ref="${esc(o.ref)}"><div class="main"><div class="t">${esc(o.ref)} ${badge(o.status)}</div>
+        <div class="s">${who} · ${n} ${n == 1 ? 'piece' : 'pieces'} · ${ago(o.created_at)}</div></div><div class="amt">${rupee(o.subtotal)}</div></button>`
+    }).join('') : `<div class="empty">${OS.q || OS.status ? 'No orders match.' : 'No orders yet. They appear here the moment a shopper is sent to WhatsApp.'}</div>`;
+    $$('#olist .row').forEach(b => b.onclick = () => openOrder(b.dataset.ref));
+  }
+
+  const waMsg = o => {
+    const first = (o.name || '').split(' ')[0];
+    const hi = first ? `Hi ${first}, ` : 'Hi, ';
+    return ({
+      new: `${hi}thank you for your AANGAN order ${o.ref}! Could you please share your name, full address and pincode so we can confirm availability and shipping?`,
+      confirmed: `${hi}your AANGAN order ${o.ref} is confirmed. Your total is ${rupee(o.subtotal)}${o.free_ship ? ' with free shipping' : ' + shipping'}. Here is the payment link: `,
+      paid: `${hi}we have received your payment for order ${o.ref}. Thank you! We will share tracking details as soon as it ships.`,
+      shipped: `${hi}your AANGAN order ${o.ref} has been shipped. Tracking: `,
+      delivered: `${hi}we hope you love your AANGAN pieces! If you have a moment, we would be grateful for a photo or a few words about them.`,
+      cancelled: `${hi}your AANGAN order ${o.ref} has been cancelled as discussed. Please reach out any time.`
+    })[o.status] || '';
+  };
+  const waLink = o => { const p = String(o.phone || '').replace(/\D/g, ''); const num = p.length === 10 ? '91' + p : p; return num ? `https://wa.me/${num}?text=${encodeURIComponent(waMsg(o))}` : '' };
+  const summary = o => `Order ${o.ref}\n${o.items.map(i => `${i.qty} × ${i.name} — ${rupee(i.price * i.qty)}`).join('\n')}\nSubtotal: ${rupee(o.subtotal)}${o.free_ship ? ' (free shipping)' : ''}${o.name ? `\n\n${o.name}\n${o.phone}\n${o.address}, ${o.city} - ${o.pincode}` : ''}${o.note ? `\nNote: ${o.note}` : ''}`;
+
+  async function openOrder(ref) {
+    openSheet(head(esc(ref)) + '<div class="pb"><p class="muted">Loading…</p></div>');
+    let o; try { o = (await api('orders/' + encodeURIComponent(ref))).order } catch (e) { $('.pb', panel).innerHTML = `<p class="err">${esc(e.message)}</p>`; return }
+    renderOrder(o);
+  }
+  function renderOrder(o) {
+    const wa = waLink(o);
+    panel.innerHTML = head(esc(o.ref), badge(o.status)) + `<div class="pb">
+      <div class="card"><h3>Status</h3><div class="steps">${STATUS.map(([k, l]) => `<button data-set="${k}" aria-pressed="${o.status === k}">${l}</button>`).join('')}</div>
+        <p class="hint">${o.status === 'new' ? 'New = the shopper was sent to WhatsApp. Mark it Confirmed once their message arrives and you have checked stock.' : 'Updated ' + esc(when(o.updated_at))}</p></div>
+      <div class="card"><h3>Items</h3><table class="items">${o.items.map(i => `<tr><td>${i.qty} × ${esc(i.name)}</td><td>${rupee((i.price || 0) * i.qty)}</td></tr>`).join('')}</table>
+        <div class="tot"><span>Subtotal</span><span>${rupee(o.subtotal)}</span></div><p class="hint">${o.free_ship ? 'Qualifies for free shipping.' : 'Shipping to be added.'} Prices are the ones on the site when the order was placed.</p></div>
+      <div class="card"><h3>Customer</h3>${o.name ? `<dl class="kv"><dt>Name</dt><dd>${esc(o.name)}</dd><dt>Phone</dt><dd><a href="tel:${esc(o.phone)}">${esc(o.phone)}</a></dd>
+        <dt>Address</dt><dd>${esc(o.address)}<br>${esc(o.city)} – ${esc(o.pincode)}</dd>${o.note ? `<dt>Note</dt><dd>${esc(o.note)}</dd>` : ''}</dl>`
+        : `<p class="muted small">This shopper chose “Order on WhatsApp”, so their name and address will come in the chat. Add them to your note below.</p>`}
+        <div class="acts">${wa ? `<a class="btn" href="${esc(wa)}" target="_blank" rel="noopener">WhatsApp customer</a>` : ''}<button class="btn line" id="copy">Copy order</button></div>
+        ${wa ? `<p class="hint">Opens WhatsApp with a message for the “${esc(stLabel(o.status))}” step. You can edit it before sending.</p>` : ''}</div>
+      <div class="card"><h3>Your private note</h3><label class="f" for="anote" style="position:absolute;left:-9999px">Private note</label>
+        <textarea class="in" id="anote" placeholder="Payment reference, tracking number, the customer's address from the chat…">${esc(o.admin_note)}</textarea>
+        <div class="acts"><button class="btn line" id="savenote">Save note</button></div></div>
+      <div class="card"><h3>History</h3><ul class="hist">${o.events.map(e => `<li><span>${esc(stLabel(e.status))}${e.by_email && e.by_email !== 'website' ? ` <span class="muted">· ${esc(e.by_email)}</span>` : ''}</span><span class="muted">${esc(when(e.at))}</span></li>`).join('')}</ul>
+        <p class="hint">${o.method === 'details_form' ? 'Checked out with delivery details.' : 'Checked out with “Order on WhatsApp”.'}</p></div></div>`;
+    $$('.steps button', panel).forEach(b => b.onclick = async () => {
+      if (b.dataset.set === o.status) return;
+      if (b.dataset.set === 'cancelled' && !confirm('Mark this order as cancelled?')) return;
+      b.disabled = true;
+      try { const r = await api('orders/' + encodeURIComponent(o.ref), { method: 'PATCH', body: JSON.stringify({ status: b.dataset.set }) }); renderOrder(r.order); toast('Marked ' + stLabel(r.order.status)); loadOrders() }
+      catch (e) { b.disabled = false; toast(e.message) }
+    });
+    $('#savenote', panel).onclick = async e => {
+      e.target.disabled = true;
+      try { await api('orders/' + encodeURIComponent(o.ref), { method: 'PATCH', body: JSON.stringify({ admin_note: $('#anote', panel).value }) }); toast('Note saved') }
+      catch (er) { toast(er.message) } e.target.disabled = false;
+    };
+    $('#copy', panel).onclick = async () => { try { await navigator.clipboard.writeText(summary(o)); toast('Order copied') } catch (_) { toast('Could not copy') } };
+  }
+
+  /* ================= PRODUCTS ================= */
+  let PROD = { list: [], pending: 0, q: '' };
+  async function loadProducts() {
+    const v = $('#view');
+    if (!$('#prod-ui', v)) v.innerHTML = `<div id="prod-ui"><div id="pubbar"></div><div class="tools"><input class="search" id="pq" type="search" placeholder="Search products" aria-label="Search products"><button class="btn" id="addp">+ Add product</button></div><div class="list prod" id="plist"><p class="muted">Loading…</p></div></div>`;
+    $('#pq').value = PROD.q; $('#pq').oninput = e => { PROD.q = e.target.value.trim().toLowerCase(); drawProducts() };
+    $('#addp').onclick = () => editProduct(null);
+    try { const d = await api('products'); PROD.list = d.products; PROD.pending = d.pending; PROD.last = d.lastPublishAt } catch (e) { if (e.message !== 'signed-out') $('#plist').innerHTML = `<p class="err">${esc(e.message)}</p>`; return }
+    drawPub(); drawProducts();
+  }
+  function drawPub(state) {
+    const el = $('#pubbar'); if (!el) return;
+    if (state === 'publishing') { el.innerHTML = `<div class="pub ok"><p><b>Publishing…</b> Your changes will be live on the website in about 1–2 minutes.</p></div>`; return }
+    el.innerHTML = PROD.pending ? `<div class="pub"><p><b>${PROD.pending} ${PROD.pending == 1 ? 'change is' : 'changes are'} not on the website yet.</b><br><span class="small muted">Make all your edits, then publish once.</span></p><button class="btn" id="pubbtn">Publish to website</button></div>`
+      : `<div class="pub ok"><p>Everything is live on the website.<span class="small muted"> Last published ${esc(when(PROD.last))}.</span></p></div>`;
+    const b = $('#pubbtn'); if (b) b.onclick = async () => {
+      if (!confirm('Publish all changes to the website now?')) return; b.disabled = true;
+      try { await api('publish', { method: 'POST' }); PROD.pending = 0; drawPub('publishing'); setTimeout(() => { if (tab === 'products') loadProducts() }, 150000) }
+      catch (e) { b.disabled = false; toast(e.message) }
+    };
+  }
+  function drawProducts() {
+    const l = PROD.list.filter(p => !PROD.q || p.name.toLowerCase().includes(PROD.q));
+    $('#plist').innerHTML = l.length ? l.map(p => `<div class="row"><img src="${esc(imgUrl(p.cardImage || p.cardSrc))}" alt="" loading="lazy" width="52" height="66">
+      <button class="main" data-edit="${esc(p.id)}" style="all:unset;flex:1;min-width:0;cursor:pointer"><div class="t">${esc(p.name)}</div><div class="s">${rupee(p.price)}${p.mrp ? ` <s>${rupee(p.mrp)}</s>` : ''}${p.available ? '' : ' · <b>Unavailable</b>'}</div></button>
+      <button class="toggle" role="switch" aria-checked="${p.available}" aria-label="${esc(p.name)} available" data-av="${esc(p.id)}"></button></div>`).join('')
+      : `<div class="empty">${PROD.q ? 'No products match.' : 'No products yet.'}</div>`;
+    $$('[data-edit]').forEach(b => b.onclick = () => editProduct(PROD.list.find(p => p.id === b.dataset.edit)));
+    $$('[data-av]').forEach(b => b.onclick = async () => {
+      const p = PROD.list.find(x => x.id === b.dataset.av), next = !p.available; b.disabled = true;
+      try { const r = await api('products/' + encodeURIComponent(p.id), { method: 'PUT', body: JSON.stringify({ ...formFrom(p), available: next }) }); Object.assign(p, r.product); PROD.pending++; drawPub(); drawProducts(); toast(next ? 'Marked available' : 'Marked unavailable') }
+      catch (e) { toast(e.message); b.disabled = false }
+    });
+  }
+  const formFrom = p => ({ name: p.name, description: p.desc, price: p.price, mrp: p.mrp, category: p.category, details: p.details, care: p.care, dispatch: p.dispatch, available: p.available, slug: p.slug });
+  const autoMrp = price => price ? Math.round(price / 0.8) : '';
+
+  function editProduct(p) {
+    const isNew = !p; p = p || { name: '', desc: '', price: '', mrp: '', details: {}, care: [], dispatch: '', available: true };
+    let photo = null;   // a new photo chosen on this screen
+    const det = Object.entries(p.details || {}); if (!det.length) det.push(['Size', '']);
+    openSheet(head(isNew ? 'Add product' : 'Edit product') + `<form class="pb" id="pf" novalidate>
+      <div class="card"><h3>Photo</h3><div class="photo"><div class="pv" id="pv" ${p.cardSrc ? `style="background-image:url('${esc(imgUrl(p.cardSrc))}')"` : ''}>${p.cardSrc ? '' : 'No photo yet'}</div>
+        <div><label class="btn line" for="pfile">${p.cardSrc ? 'Change photo' : 'Choose photo'}</label><input id="pfile" type="file" accept="image/*">
+        <p class="hint">Use the original photo from your phone. It is resized and sharpened for the website automatically.</p></div></div></div>
+      <div class="card"><label class="f" for="fname">Name</label><input class="in" id="fname" required maxlength="160" value="${esc(p.name)}" placeholder="Pink Lotus Shubh Labh Toran (38 inches)">
+        <p class="hint">Include the motif and colour (lotus, peacock, pink…). “Complete the look” uses them to suggest matching pieces.</p>
+        <div class="two"><div><label class="f" for="fprice">Price (₹)</label><input class="in" id="fprice" inputmode="numeric" value="${esc(p.price ?? '')}" placeholder="1799"></div>
+        <div><label class="f" for="fmrp">Price before offer (₹)</label><input class="in" id="fmrp" inputmode="numeric" value="${esc(p.mrp ?? '')}" placeholder="${esc(autoMrp(p.price))}"></div></div>
+        <p class="hint" id="mrphint">Leave “before offer” empty to use price ÷ 0.8 (shows as 20% off).</p>
+        <label class="f" for="fdesc">Description</label><textarea class="in" id="fdesc" maxlength="3000">${esc(p.desc)}</textarea></div>
+      <div class="card"><h3>Details</h3><div id="kvs">${det.map(([k, v]) => kvRow(k, v)).join('')}</div><button type="button" class="btn ghost" id="addkv">+ Add detail</button>
+        <label class="f" for="fcare">Care (one per line)</label><textarea class="in" id="fcare" placeholder="Wipe gently with a dry cloth">${esc((p.care || []).join('\n'))}</textarea>
+        <label class="f" for="fdisp">Dispatch</label><input class="in" id="fdisp" value="${esc(p.dispatch)}" placeholder="Dispatches in 3–5 working days."></div>
+      <div class="card"><div class="swrow"><div><b>Available to order</b><p class="hint" style="margin:0">Turn off when sold out. It stays on the site as “Currently unavailable”.</p></div>
+        <button type="button" class="toggle" role="switch" id="favail" aria-checked="${p.available !== false}" aria-label="Available to order"></button></div>
+        ${isNew ? '' : `<label class="f" for="fslug">Web address</label><input class="in" id="fslug" value="${esc(p.slug)}"><p class="hint">aangan.co.in/p/<b>${esc(p.slug)}</b>/ — changing it breaks links people have already shared.</p>`}</div>
+      <p class="err" id="ferr" role="alert"></p>
+      ${isNew ? '' : `<div class="acts" style="justify-content:space-between"><a class="btn ghost" href="/p/${esc(p.slug)}/" target="_blank" rel="noopener">View on website</a><button type="button" class="btn bad" id="del">Remove from shop</button></div>`}
+    </form><div class="save"><span class="small muted" id="prog"></span><button class="btn" id="psave" form="pf" type="submit">${isNew ? 'Add product' : 'Save changes'}</button></div>`);
+    const f = $('#pf', panel);
+    const syncHint = () => { const pr = Number($('#fprice').value) || 0; $('#fmrp').placeholder = autoMrp(pr) || ''; };
+    $('#fprice').oninput = syncHint;
+    $('#addkv').onclick = () => { $('#kvs').insertAdjacentHTML('beforeend', kvRow('', '')); };
+    $('#kvs').onclick = e => { const x = e.target.closest('.x'); if (x) x.parentElement.remove() };
+    $('#favail').onclick = e => e.currentTarget.setAttribute('aria-checked', e.currentTarget.getAttribute('aria-checked') !== 'true');
+    $('#pfile').onchange = e => { const file = e.target.files[0]; if (!file) return; photo = file; const u = URL.createObjectURL(file); const pv = $('#pv'); pv.style.backgroundImage = `url('${u}')`; pv.textContent = '' };
+    const del = $('#del'); if (del) del.onclick = async () => {
+      if (!confirm(`Remove “${p.name}” from the shop? Old orders keep their details.`)) return;
+      try { await api('products/' + encodeURIComponent(p.id), { method: 'DELETE' }); closeSheet(); toast('Removed. Publish to update the website.'); loadProducts() } catch (e) { toast(e.message) }
+    };
+    f.onsubmit = async e => {
+      e.preventDefault(); const err = $('#ferr'); err.textContent = '';
+      const name = $('#fname').value.trim(), price = $('#fprice').value.trim(), mrp = $('#fmrp').value.trim();
+      if (!name) { err.textContent = 'Please enter a name.'; $('#fname').focus(); return }
+      if (price && !/^\d+$/.test(price)) { err.textContent = 'Price must be a whole number of rupees.'; $('#fprice').focus(); return }
+      if (mrp && (!/^\d+$/.test(mrp) || Number(mrp) <= Number(price))) { err.textContent = '“Price before offer” must be higher than the price.'; $('#fmrp').focus(); return }
+      if (isNew && !photo) { err.textContent = 'Please choose a photo.'; return }
+      const details = {}; $$('.kvrow', panel).forEach(r => { const k = $('.k', r).value.trim(), v = $('.v', r).value.trim(); if (k && v) details[k] = v });
+      const body = { name, price: price ? Number(price) : null, mrp: mrp ? Number(mrp) : (price ? autoMrp(Number(price)) : null), description: $('#fdesc').value.trim(),
+        details, care: $('#fcare').value.split('\n').map(s => s.trim()).filter(Boolean), dispatch: $('#fdisp').value.trim(), available: $('#favail').getAttribute('aria-checked') === 'true', category: p.category || '' };
+      if (!isNew) body.slug = $('#fslug').value.trim();
+      const btn = $('#psave'); btn.disabled = true; const prog = $('#prog');
+      try {
+        if (photo) body.media = await processPhoto(photo, m => prog.textContent = m);
+        prog.textContent = 'Saving…';
+        const r = isNew ? await api('products', { method: 'POST', body: JSON.stringify(body) }) : await api('products/' + encodeURIComponent(p.id), { method: 'PUT', body: JSON.stringify(body) });
+        closeSheet(); toast(isNew ? 'Product added. Publish to show it on the website.' : 'Saved. Publish to update the website.'); loadProducts();
+      } catch (er) { err.textContent = er.message === 'signed-out' ? '' : er.message; btn.disabled = false; prog.textContent = '' }
+    };
+  }
+  const kvRow = (k, v) => `<div class="kvrow"><input class="in k" aria-label="Detail name" placeholder="Size" value="${esc(k)}"><input class="in v" aria-label="Detail value" placeholder="38 inches" value="${esc(v)}"><button type="button" class="x" aria-label="Remove detail">×</button></div>`;
+
+  /* ---------- photo: make every size the website uses, on the phone, then upload ----------
+     Same sizes as tools/optimize-images.js. Browsers that cannot make WebP (older iPhones) get JPEG instead. */
+  async function processPhoto(file, say) {
+    say('Reading photo…');
+    let bmp;
+    try { bmp = await createImageBitmap(file, { imageOrientation: 'from-image' }) }
+    catch (_) { bmp = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('This photo format is not supported. Please choose a JPG or PNG.')); i.src = URL.createObjectURL(file) }) }
+    const W = bmp.width, H = bmp.height;
+    if (W < 500 || H < 500) throw new Error('This photo is too small. Please use a photo at least 1000 pixels wide.');
+    const fit = (mw, mh) => { const s = Math.min(1, mw / W, mh / H); return [Math.round(W * s), Math.round(H * s)] };
+    const make = async (mw, mh, type, q) => {
+      const [w, h] = fit(mw, mh); let src = bmp, sw = W, sh = H;
+      while (sw / 2 >= w * 1.5) {          // halve in steps for a sharper result
+        const c = document.createElement('canvas'); c.width = Math.round(sw / 2); c.height = Math.round(sh / 2);
+        const x = c.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(src, 0, 0, c.width, c.height); src = c; sw = c.width; sh = c.height;
+      }
+      const c = document.createElement('canvas'); c.width = w; c.height = h; const x = c.getContext('2d');
+      if (type === 'image/jpeg') { x.fillStyle = '#fff'; x.fillRect(0, 0, w, h) }
+      x.imageSmoothingQuality = 'high'; x.drawImage(src, 0, 0, w, h);
+      let blob = await new Promise(r => c.toBlob(r, type, q));
+      if (!blob || blob.type !== type) { blob = await new Promise(r => c.toBlob(r, 'image/jpeg', Math.min(q + 0.04, 0.92))) }   // no WebP support: JPEG
+      return { blob, w, h };
+    };
+    const plan = [['card-400', 400, 600, 'image/webp', .74], ['card-600', 600, 900, 'image/webp', .74], ['share', 600, 900, 'image/jpeg', .78],
+      ['detail-800', 800, 1200, 'image/webp', .78], ['detail-1200', 1200, 1600, 'image/webp', .8], ['detail-1200j', 1200, 1600, 'image/jpeg', .82], ['zoom', 2400, 2400, 'image/webp', .9]];
+    const out = {};
+    for (let i = 0; i < plan.length; i++) {
+      const [name, mw, mh, type, q] = plan[i];
+      say(`Preparing photo ${i + 1}/${plan.length}…`);
+      const { blob, w, h } = await make(mw, mh, type, q);
+      say(`Uploading ${i + 1}/${plan.length}…`);
+      const r = await api('images?name=' + name, { method: 'POST', body: blob, headers: { 'content-type': blob.type } });
+      out[name] = { url: r.url, w, h };
+    }
+    return {
+      image: out['detail-1200j'].url, shareImage: out.share.url, shareW: out.share.w, shareH: out.share.h,
+      cardImage: out['card-400'].url, cardSrc: out['card-600'].url, cardSet: `${out['card-400'].url} 400w, ${out['card-600'].url} 600w`, cardW: out['card-600'].w, cardH: out['card-600'].h,
+      detailSrc: out['detail-1200'].url, detailSet: `${out['detail-800'].url} 800w, ${out['detail-1200'].url} 1200w`, detailW: out['detail-1200'].w, detailH: out['detail-1200'].h,
+      zoomSrc: out.zoom.url
+    };
+  }
+
+  setTab(tab);
+})();
+</script>
+</body></html>

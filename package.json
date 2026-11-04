@@ -1,0 +1,19 @@
+{
+  "name": "aangan-website",
+  "private": true,
+  "description": "AANGAN static website and build tools",
+  "scripts": {
+    "build": "node tools/build-products.js && node tools/package-site.js",
+    "dev": "npm run build && wrangler pages dev --port 8788",
+    "db:import": "node tools/import-to-d1.js"
+  },
+  "dependencies": {
+    "sharp": "0.33.5"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

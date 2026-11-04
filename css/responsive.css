@@ -1,0 +1,8 @@
+@media(max-width:991.98px){
+ .hdr{grid-template-columns:auto 1fr auto}.hdr nav.d{display:none}.burger{display:inline-flex}
+ .logo{justify-self:center}.logo img{height:16px}
+ .mnav{display:block}.mnav a,.mnav summary{display:block;padding:.8rem 0;border-bottom:1px solid rgba(175,141,86,.5);text-decoration:none;font-family:var(--serif);font-size:1.5rem}
+ .mnav details a{font-family:var(--sans);font-size:1rem;padding-left:1rem}
+}
+@media(max-width:575.98px){.hero .ph{aspect-ratio:1/1}.btn-a,.btn-b{width:100%;text-align:center;margin-bottom:.6rem}.logo img{height:14px}}
+@media(min-width:1600px){.container{max-width:1440px}}

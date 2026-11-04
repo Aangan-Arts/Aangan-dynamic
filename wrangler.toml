@@ -1,0 +1,19 @@
+# AANGAN on Cloudflare Pages. See SETUP.md for the one-time setup.
+name = "aangan"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-10-01"
+
+[vars]
+FREE_SHIPPING_ABOVE = "1999"      # same as freeShippingAbove in js/config.js
+IMAGE_BASE_URL = ""               # optional: e.g. "https://images.aangan.co.in/" once R2 has a custom domain
+ACCESS_TEAM_DOMAIN = ""           # e.g. "aangan.cloudflareaccess.com" (SETUP.md, step 6)
+ACCESS_AUD = ""                   # the Access application's "Application Audience (AUD) Tag"
+
+[[d1_databases]]
+binding = "aangan"
+database_name = "aangan"
+database_id = "6fa471e9-a1c5-4865-a9d1-6559b9641ff4"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "aangan-images"
