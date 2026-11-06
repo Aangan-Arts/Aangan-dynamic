@@ -6,8 +6,8 @@ compatibility_date = "2026-10-01"
 [vars]
 FREE_SHIPPING_ABOVE = "1999"      # same as freeShippingAbove in js/config.js
 IMAGE_BASE_URL = ""               # optional: e.g. "https://images.aangan.co.in/" once R2 has a custom domain
-ACCESS_TEAM_DOMAIN = ""           # e.g. "aangan.cloudflareaccess.com" (SETUP.md, step 6)
-ACCESS_AUD = ""                   # the Access application's "Application Audience (AUD) Tag"
+ACCESS_TEAM_DOMAIN = "small-base-8539.cloudflareaccess.com"           # e.g. "aangan.cloudflareaccess.com" (SETUP.md, step 6)
+ACCESS_AUD = "f6fd13502f9e52d896c004e415960dd2e920e881189759b47040ff0e0001db40"                   # the Access application's "Application Audience (AUD) Tag"
 
 [[d1_databases]]
 binding = "DB"
