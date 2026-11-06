@@ -10,7 +10,7 @@ ACCESS_TEAM_DOMAIN = ""           # e.g. "aangan.cloudflareaccess.com" (SETUP.md
 ACCESS_AUD = ""                   # the Access application's "Application Audience (AUD) Tag"
 
 [[d1_databases]]
-binding = "aangan"
+binding = "DB"
 database_name = "aangan"
 database_id = "6fa471e9-a1c5-4865-a9d1-6559b9641ff4"
 
